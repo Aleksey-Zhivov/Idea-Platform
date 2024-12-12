@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import './ticket.scss';
-import { TTicket } from './types';
+import { TTicketUIProps } from './types';
 
-export const Ticket: FC<TTicket> = (props) => (
+export const Ticket: FC<TTicketUIProps> = (props) => (
     <div className='ticket'>
         <div>{props.carrier}</div>
         <button>{props.price}{props.currency}</button>

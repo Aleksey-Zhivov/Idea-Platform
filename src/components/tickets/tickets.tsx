@@ -1,14 +1,12 @@
 import { FC } from 'react';
 import './tickets.scss';
-import { useCustomSelector } from '../../services/store';
 import { Ticket } from '../ui/ticket/ticket';
+import { TTicketProps } from './types';
 
-export const Tickets: FC = () => {
-    const tickets = useCustomSelector((store) => store.getTickets.response);
-
+export const Tickets: FC<TTicketProps> = (props) => {
     return (
         <section className='tickets'>
-            {tickets.map((ticket, id) => {
+            {props.tickets.map((ticket, id) => {
                 return (
                     <div key={id} >
                         <h2>{ticket.destination}</h2>
@@ -26,10 +24,8 @@ export const Tickets: FC = () => {
                             stops={ticket.stops} 
                             price={ticket.price} />
                     </div>
-
                 )
             })}
-        </section>
-        
+        </section>   
     )
 }

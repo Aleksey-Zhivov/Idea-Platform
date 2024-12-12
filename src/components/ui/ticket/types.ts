@@ -1,6 +1,6 @@
 export type TCurrency = 'RUB' | 'EUR' | 'USD';
 
-export type TTicket = {
+export type TTicketUIProps = {
     currency: TCurrency;
     origin: string;
     origin_name: string,

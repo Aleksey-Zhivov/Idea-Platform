@@ -13,8 +13,3 @@ body {
   min-height: 100vh;
 }
 
-* {
-  --primary-gap: 20px;
-  --border: 1px solid black;
-  --primary-padding: 12px;
-}
