@@ -1,53 +1,69 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useMemo } from 'react';
 import './sidebar.scss';
 import { useCustomSelector } from '../../services/store';
 import { TSidebar, TCheckboxState } from './types';
-import { CheckboxContainer } from '../checkboxes/chexkboxes';
+import { Currency, ICurrencyOption } from '../ui/radio/types';
+import { CurrencySelector } from '../currency-selector/currensy-selector';
+import { StopoverCheckbox } from '../checkboxes/stopover-checkboxes';
 
-export const Sidebar: FC<TSidebar> = ((props) => {
+export const Sidebar: FC<TSidebar> = (props) => {
     const tickets = useCustomSelector((store) => store.getTickets.response);
-    const stopOvers: number[] = [];
-    const [ending, setEnding] = useState<Record<number, string>>({});
-    let temp: Record<number, string> = {};
-    const [checkboxState, setCheckboxState] = useState<TCheckboxState>({
-        0: false,
-        1: false,
-        2: false,
-        3: false,
-        all: true,
-      });
+    const stopOvers: number[] = useMemo(() => {
+        const uniqueStopOvers = new Set<number>();
+        tickets.forEach(ticket => uniqueStopOvers.add(ticket.stops));
+        return Array.from(uniqueStopOvers);
+    }, [tickets]);
 
-    tickets.map((ticket) => {
-        stopOvers.includes(ticket.stops) ? null : stopOvers.push(ticket.stops);
+    const [ending, setEnding] = useState<Record<number, string>>({});
+    const [selectedCurrency, setSelectedCurrency] = useState<Currency>('RUB');
+    const [checkboxState, setCheckboxState] = useState<TCheckboxState>(() => {
+        const initialState: TCheckboxState = { all: false };
+        stopOvers.forEach(stops => initialState[stops] = true);
+        return initialState;
     });
 
     const handleCheckboxChange = (updatedCheckboxes: TCheckboxState) => {
         setCheckboxState(updatedCheckboxes);
     };
 
+    const handleCurrencyChange = (currency: Currency) => {
+        setSelectedCurrency(currency);
+    };
+
     useEffect(() => {
+        const temp: Record<number, string> = {};
         stopOvers.forEach((stops) => {
             if (stops === 0 || (stops >= 5 && stops <= 9)) {
-                temp = {...temp, [stops]: 'ок'};
+            temp[stops] = 'ок';
             } else if (stops === 1) {
-                temp = {...temp, [stops]: 'ка'};
+            temp[stops] = 'ка';
             } else if (stops >= 2 && stops <= 4) {
-                temp = {...temp, [stops]: 'ки'};
+            temp[stops] = 'ки';
             }
-            setEnding(temp)
         });
-
+        setEnding(temp);
         props.onChange(checkboxState);
+        props.getCurrency(selectedCurrency);
+    }, [stopOvers, checkboxState, selectedCurrency]);
 
-    }, [Object.keys(tickets).length, checkboxState]);
+    const currencyOptions: ICurrencyOption[] = [
+        { value: 'RUB', label: 'RUB' },
+        { value: 'USD', label: 'USD' },
+        { value: 'EUR', label: 'EUR' },
+    ];
 
     return (
         <section className='sidebar'>
-                <CheckboxContainer
-                    checkboxesArray={stopOvers}
-                    onCheckboxChange={handleCheckboxChange}
-                    ending={ending}
-                />
+            <CurrencySelector
+                options={currencyOptions}
+                selectedCurrency={selectedCurrency}
+                onCurrencyChange={handleCurrencyChange}
+            />
+            <StopoverCheckbox
+                checkboxesArray={stopOvers}
+                onCheckboxChange={handleCheckboxChange}
+                ending={ending}
+            />
         </section>
-    )
-});
+    );
+};

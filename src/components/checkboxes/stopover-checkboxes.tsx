@@ -1,18 +1,26 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { TCheckboxContainerProps } from './types';
 import { TCheckboxState } from '../sidebar/types';
-import { CheckboxGroup } from '../ui/checkbox/checkbox';
+import { StopoverCheckboxUI } from '../ui/checkbox/stopovers-checkbox-ui';
 
-export const CheckboxContainer: FC<TCheckboxContainerProps> = (props) => {
-  const initialState = props.checkboxesArray.reduce((state, item) => {
-    state[item] = true;
-    return state;
-  }, {} as TCheckboxState);
-
+export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
   const [checkboxes, setCheckboxes] = useState<TCheckboxState>({
-    all: true, 
-    ...initialState,
+    all: false,
   });
+
+  useEffect(() => {
+    if (props.checkboxesArray.length > 0) {
+      const initialState = props.checkboxesArray.reduce((state, item) => {
+        state[item] = true; 
+        return state;
+      }, {} as TCheckboxState);
+
+      setCheckboxes({
+        all: true,
+        ...initialState,
+      });
+    }
+  }, [props.checkboxesArray]);
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -23,13 +31,10 @@ export const CheckboxContainer: FC<TCheckboxContainerProps> = (props) => {
         return state;
       }, {} as TCheckboxState);
 
-      console.log(updatedCheckboxes);
-
       setCheckboxes({
         all: checked,
         ...updatedCheckboxes,
       });
-
     } else {
       const updatedCheckboxes = { ...checkboxes, [name]: checked };
       const allChecked = props.checkboxesArray.every((item) => updatedCheckboxes[item]);
@@ -43,7 +48,7 @@ export const CheckboxContainer: FC<TCheckboxContainerProps> = (props) => {
   }, [checkboxes]);
 
   return (
-    <CheckboxGroup
+    <StopoverCheckboxUI
       checkboxes={checkboxes}
       checkboxesArray={props.checkboxesArray}
       onCheckboxChange={handleCheckboxChange}

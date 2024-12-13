@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { TCheckboxGroupProps } from './type';
+import { TCheckboxGroupProps } from './types';
 
-export const CheckboxGroup: FC<TCheckboxGroupProps> = ( props) => {
+export const StopoverCheckboxUI: FC<TCheckboxGroupProps> = ( props) => {
   return (
     <div>
       <label>

@@ -1,7 +1,7 @@
-export type TCurrency = 'RUB' | 'EUR' | 'USD';
+import { Currency } from "../radio/types";
 
 export type TTicketUIProps = {
-    currency: TCurrency;
+    currency: Currency;
     origin: string;
     origin_name: string,
     destination: string,
@@ -12,6 +12,5 @@ export type TTicketUIProps = {
     arrival_time: string,
     carrier: string,
     stops: number,
-    price: number
-
+    price: number,
 }
