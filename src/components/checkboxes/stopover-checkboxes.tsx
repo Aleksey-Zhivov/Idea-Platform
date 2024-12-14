@@ -43,9 +43,25 @@ export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
     }
   };
 
+  const handleOnlyClick = (box: number) => {
+    const updatedCheckboxes = { ...checkboxes };
+    props.checkboxesArray.forEach(stops => {
+      updatedCheckboxes[stops] = stops === box;
+    });
+  
+    if (updatedCheckboxes[box]) {
+      updatedCheckboxes.all = props.checkboxesArray.every(stops => updatedCheckboxes[stops]);
+    } else {
+      updatedCheckboxes.all = false;
+    }
+
+    setCheckboxes(updatedCheckboxes);
+  };
+  
   useEffect(() => {
     props.onCheckboxChange(checkboxes);
-  }, [checkboxes]);
+    console.log(checkboxes);
+  }, [checkboxes, props.checkboxesArray]);
 
   return (
     <StopoverCheckboxUI
@@ -53,6 +69,7 @@ export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
       checkboxesArray={props.checkboxesArray}
       onCheckboxChange={handleCheckboxChange}
       ending={props.ending}
+      handleOnlyClick={handleOnlyClick}
     />
   );
 };

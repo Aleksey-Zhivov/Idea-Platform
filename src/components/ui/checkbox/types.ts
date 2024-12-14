@@ -5,4 +5,5 @@ export type TCheckboxGroupProps = {
     checkboxesArray: number[];
     onCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
     ending: Record<number, string>;
+    handleOnlyClick: (box: number) => void;
   }

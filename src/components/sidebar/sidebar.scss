@@ -1,0 +1,14 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-background-color);
+    border-radius: var(--primary-border-radius);
+    max-height: max-content;
+    padding: var(--primary-padding);
+    gap: 20px;
+    box-shadow: 0 0 0 1px rgba(103, 163, 190, 0.25);
+    position: sticky;
+    align-self: start; 
+    top: 32px;
+    z-index: 10;
+}

@@ -1,5 +1,5 @@
 .tickets-page {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: var(--primary-gap);
 }

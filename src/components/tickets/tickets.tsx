@@ -7,8 +7,6 @@ export const Tickets: FC<TTicketProps> = (props) => {
   return (
     <section className='tickets'>
       {props.tickets.map((ticket, id) => (
-        <div key={id}>
-          <h2>{ticket.destination}</h2>
           <Ticket 
             currency={props.selectedCurrency}
             price={parseFloat((ticket.price * props.exchangeRates).toFixed(2))}
@@ -22,8 +20,8 @@ export const Tickets: FC<TTicketProps> = (props) => {
             arrival_time={ticket.arrival_time} 
             carrier={ticket.carrier} 
             stops={ticket.stops} 
+            key={id}
           />
-        </div>
       ))}
     </section>
   );

@@ -4,6 +4,7 @@ import { TicketsPage } from './pages/tickets-page/tickets-page'
 import { useCustomDispatch } from './services/store';
 import { useEffect } from 'react';
 import { fetchTickets } from './services/getTicketsSlice';
+import { Header } from './components/header/header';
 
 const AppRouter = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
+      <Header />
       <AppRouter />
     </BrowserRouter>
   )

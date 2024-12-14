@@ -1,0 +1,22 @@
+.header {
+    padding: 20px 0 32px;
+    &__image {
+        max-width: 48px;
+        max-height: 48px;
+        border-radius: 50%;
+        box-shadow: 3px 5px 3px 3px rgba(45, 61, 68, 0.25);
+        transition: box-shadow 0.3s ease-in-out, transform 0.5s ease-in-out;
+        position: relative;
+        display: inline-block;
+
+        &:hover {
+            box-shadow: 0px 0px 15px 5px rgba(45, 61, 68, 0.35);
+            transform: rotate(360deg); 
+        }
+
+        &:not(:hover) {
+            box-shadow: 3px 5px 3px 3px rgba(45, 61, 68, 0.25);
+            transition: box-shadow 0.3s 0.4s ease-in-out, transform 0.5s ease-in-out;
+        }
+    }
+}

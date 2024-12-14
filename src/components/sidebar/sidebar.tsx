@@ -1,10 +1,11 @@
-import { FC, useEffect, useState, useMemo } from 'react';
+import { FC, useState, useMemo } from 'react';
 import './sidebar.scss';
 import { useCustomSelector } from '../../services/store';
 import { TSidebar, TCheckboxState } from './types';
 import { Currency, ICurrencyOption } from '../ui/radio/types';
 import { CurrencySelector } from '../currency-selector/currensy-selector';
 import { StopoverCheckbox } from '../checkboxes/stopover-checkboxes';
+import { useEnding } from '../../hooks/useEnding';
 
 export const Sidebar: FC<TSidebar> = (props) => {
     const tickets = useCustomSelector((store) => store.getTickets.response);
@@ -14,7 +15,6 @@ export const Sidebar: FC<TSidebar> = (props) => {
         return Array.from(uniqueStopOvers);
     }, [tickets]);
 
-    const [ending, setEnding] = useState<Record<number, string>>({});
     const [selectedCurrency, setSelectedCurrency] = useState<Currency>('RUB');
     const [checkboxState, setCheckboxState] = useState<TCheckboxState>(() => {
         const initialState: TCheckboxState = { all: false };
@@ -30,21 +30,13 @@ export const Sidebar: FC<TSidebar> = (props) => {
         setSelectedCurrency(currency);
     };
 
-    useEffect(() => {
-        const temp: Record<number, string> = {};
-        stopOvers.forEach((stops) => {
-            if (stops === 0 || (stops >= 5 && stops <= 9)) {
-            temp[stops] = 'ок';
-            } else if (stops === 1) {
-            temp[stops] = 'ка';
-            } else if (stops >= 2 && stops <= 4) {
-            temp[stops] = 'ки';
-            }
-        });
-        setEnding(temp);
-        props.onChange(checkboxState);
-        props.getCurrency(selectedCurrency);
-    }, [stopOvers, checkboxState, selectedCurrency]);
+    const { ending } = useEnding({
+        stopOvers,
+        checkboxState,
+        selectedCurrency,
+        onChange: props.onChange,
+        getCurrency: props.getCurrency,
+      });
 
     const currencyOptions: ICurrencyOption[] = [
         { value: 'RUB', label: 'RUB' },

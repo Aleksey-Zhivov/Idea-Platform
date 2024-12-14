@@ -1,13 +1,41 @@
 #root {
     max-width: 1280px;
+    min-width: 768px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
     box-sizing: border-box;
+    background-color: var(--page-background-color);
   }
 
 * {
+  /* текст */
+  --primary-font-size: 14px;
+  --primary-text-color: rgb(0, 0, 0);
+  --secondary-text-color: rgb(255, 255, 255);
+  --header-primary-text-color: rgb(0, 0, 0, 0.5);
+  --radio-primary-text-color: rgb(0, 123, 255);
+  --radio-secondary-text-color: rgb(255, 255, 255);
+
+  /* блоки */
   --primary-gap: 20px;
-  --border: 1px solid black;
+  --border: 1px solid var(--primary-text-color);
   --primary-padding: 12px;
+  --page-background-color: rgb(177, 224, 238, 0.25);
+  --primary-border-radius: 4px;
+
+  --secondary-background-color: rgb(255, 255, 255);
+
+  --radio-primary-border-color: rgb(0, 0, 0, 0.25);
+  --radio-secondary-border-color: rgb(0 86 179);
+
+  --radio-primary-background-color: rgb(0, 123, 255);
+  --radio-primary-background-color-hovered: rgb(0, 123, 255, 0.25);
+
+  --checkbox-primary-border-color: rgb(0, 0, 0, 0.25);
+  --checkbox-secondary-border-color: rgb(0 86 179);
+  --checkbox-primary-border-color-hovered: rgba(0, 123, 255, 0.251);
+  --checkbox-checkmark-color: rgb(0, 123, 255, 0.25);
+  --checkbox-text-only-color: rgb(255, 255, 255);
+  --checkbox-text-only-color-hovered: rgb(0, 123, 255);
 }
