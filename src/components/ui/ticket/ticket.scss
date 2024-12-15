@@ -45,7 +45,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
         padding: 12px 12px 40px 12px;
 
         &-destinations {
@@ -63,17 +62,30 @@
 
             &_date {
                 font-size: 10px;
-                color: var(--header-primary-text-color);
+                color: var(--stopover-secondary-color);
             }
         }
 
         &-stopover {
-            text-transform: uppercase;
-            color: var(--header-primary-text-color);
-            font-size: 10px;
-            margin: 0 12px;
-            width: 100%;
-            border-bottom: 1px solid var(--header-primary-text-color);
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            align-items: flex-end;
+            margin: 2% 0 10%;
+            padding: 0 2%;
+                 
+            &_text {
+                text-transform: uppercase;
+                color: var(--stopover-secondary-color);
+                font-size: 10px;
+                width: 100%;
+                border-bottom: 1px solid var(--stopover-secondary-color);
+            }
+
+            &_icon {
+                margin-bottom: -3px;
+                width: 8px;
+            }
         }
     }
 }

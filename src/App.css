@@ -6,7 +6,7 @@
     text-align: center;
     box-sizing: border-box;
     background-color: var(--page-background-color);
-  }
+}
 
 * {
   /* текст */
@@ -38,4 +38,9 @@
   --checkbox-checkmark-color: rgb(0, 123, 255, 0.25);
   --checkbox-text-only-color: rgb(255, 255, 255);
   --checkbox-text-only-color-hovered: rgb(0, 123, 255);
+
+  --stopover-secondary-color: rgba(0, 0, 0, 0.25);
+
+  --stopover-secondary-color: #5f5f5f;;
+
 }

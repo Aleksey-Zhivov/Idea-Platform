@@ -5,6 +5,7 @@ import { TTicketProps } from './types';
 
 export const Tickets: FC<TTicketProps> = (props) => {
   return (
+    props.tickets.length > 0 ?
     <section className='tickets'>
       {props.tickets.map((ticket, id) => (
           <Ticket 
@@ -23,6 +24,9 @@ export const Tickets: FC<TTicketProps> = (props) => {
             key={id}
           />
       ))}
+    </section> :
+    <section className='tickets'>
+      <span className='tickets__no-tickets'>Увы, мы не смогли найти для Вас билеты. Попробуйте изменить фильтр.</span>
     </section>
   );
 };
