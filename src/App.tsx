@@ -16,7 +16,7 @@ const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path='/' element={<TicketsPage />} />
+        <Route path='/Idea-Platform/' element={<TicketsPage />} />
       </Routes>
     </>
   )
