@@ -1,16 +1,15 @@
-import { Currency } from "../radio/types";
+import { ReactNode } from "react";
+import { ITicket } from "../../../models/ticket.model";
+import { Currency } from "../currency/types";
 
 export type TTicketUIProps = {
     currency: Currency;
-    origin: string;
-    origin_name: string,
-    destination: string,
-    destination_name: string,
-    departure_date: string,
-    departure_time: string,
-    arrival_date: string,
-    arrival_time: string,
-    carrier: string,
-    stops: number,
-    price: number,
+    ticket: ITicket;
+    isModalOpen: boolean;
+    carrierIcon: string;
+    currencySymbol: string;
+    exchangeRates: number;
+    openModal: () => void;
+    closeModal: () => void;
+    formatDate: (input: string) => ReactNode;
 }

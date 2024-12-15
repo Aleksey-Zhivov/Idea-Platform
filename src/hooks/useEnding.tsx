@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Currency } from "../components/ui/radio/types";
+import { Currency } from "../components/ui/currency/types";
 
 type UseEndingProps = {
   stopOvers: number[];

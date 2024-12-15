@@ -2,7 +2,7 @@ import { FC, useState, useMemo } from 'react';
 import './sidebar.scss';
 import { useCustomSelector } from '../../services/store';
 import { TSidebar, TCheckboxState } from './types';
-import { Currency, ICurrencyOption } from '../ui/radio/types';
+import { Currency, ICurrencyOption } from '../ui/currency/types';
 import { CurrencySelector } from '../currency-selector/currensy-selector';
 import { StopoverCheckbox } from '../checkboxes/stopover-checkboxes';
 import { useEnding } from '../../hooks/useEnding';

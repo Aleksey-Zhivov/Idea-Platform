@@ -11,7 +11,7 @@ export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
   useEffect(() => {
     if (props.checkboxesArray.length > 0) {
       const initialState = props.checkboxesArray.reduce((state, item) => {
-        state[item] = true; 
+        state[item] = true;
         return state;
       }, {} as TCheckboxState);
 
@@ -24,6 +24,10 @@ export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
+
+    if (checkboxes[name as keyof TCheckboxState] === checked) {
+      return;
+    }
 
     if (name === 'all') {
       const updatedCheckboxes = props.checkboxesArray.reduce((state, item) => {
@@ -44,24 +48,22 @@ export const StopoverCheckbox: FC<TCheckboxContainerProps> = (props) => {
   };
 
   const handleOnlyClick = (box: number) => {
-    const updatedCheckboxes = { ...checkboxes };
-    props.checkboxesArray.forEach(stops => {
-      updatedCheckboxes[stops] = stops === box;
-    });
-  
-    if (updatedCheckboxes[box]) {
-      updatedCheckboxes.all = props.checkboxesArray.every(stops => updatedCheckboxes[stops]);
+    if (checkboxes.all !== true) {
+      const resetAll = { all: true };
+      setCheckboxes(resetAll);
     } else {
-      updatedCheckboxes.all = false;
+      handleCheckboxChange({
+        target: { name: 'all', checked: false },
+      } as ChangeEvent<HTMLInputElement>);
+      handleCheckboxChange({
+        target: { name: box.toString(), checked: true },
+      } as ChangeEvent<HTMLInputElement>);
     }
-
-    setCheckboxes(updatedCheckboxes);
   };
-  
+
   useEffect(() => {
     props.onCheckboxChange(checkboxes);
-    console.log(checkboxes);
-  }, [checkboxes, props.checkboxesArray]);
+  }, [checkboxes]);
 
   return (
     <StopoverCheckboxUI

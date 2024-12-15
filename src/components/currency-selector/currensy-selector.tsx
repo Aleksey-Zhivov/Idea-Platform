@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { ICurrencySelectorProps } from '../ui/radio/types';
-import { CurrencySelectorUI } from '../ui/radio/currency';
+import { ICurrencySelectorProps } from '../ui/currency/types';
+import { CurrencySelectorUI } from '../ui/currency/currency';
 
 export const CurrencySelector: FC<ICurrencySelectorProps> = (props) => {
   return (

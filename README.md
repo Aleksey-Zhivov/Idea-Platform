@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# Тестовое задание 12.2024
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Задача - разработка веб-приложения на React
 
-Currently, two official plugins are available:
+<div id="task" style="display: block;">
+  <img style="max-width: 600px" src="/src/zadacha/задача.png" />
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Запуск проекта
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Сборка проекта производится при помощи сборщика ```Vite``` на ```dev``` окружении:
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+npm run dev 
 ```
+Babel пока не прикрчен, конфиг ```ESlint``` стандартный, предоставленный ```Vite```.
+
+## Легенда:
+
+Билеты приходят из фейкового Api-запроса (по сути мы отдаем тикеты из JSON-файла), асинхронно обрабатываются и кладутся в ```store``` при помощи ```Redux```.  
+
+Сама страница ```TicketPage``` управляет сайдбаром и билетами, раздавая данные со стора.  
+
+```Sidebar``` служит для фильтрации выдачи, его дочерние компоненты - ```StopoverCheckbox``` и ```CurrencySelector```.
+
+```CurrencySelector``` меняет в билетах валюту, пересчитывая сумму согласно хардкодным коэффициентам, взятым из гугла в декабре 2024, а так же ставит нужный значок валюты на билете.
+
+```StopoverCheckbox``` управляет выдачей результата, согласно количеству пересадок. Доступные варианты выбора. По умолчанию все чекбоксы включены. Клик по чекбоксу Все включает/выключает все чекбоксы, клик по любому чекбоксы при включенных всех выключает кликнутый чекбокс и чекбокс Все, клик по надписи ТОЛЬКО у любого чекбокса выключает все чекбоксы, кроме того, на котором был клик.
+
+## TODO
+
+1. Прикрутить ```Babel``` и настроить линтер.
+2. Описать компоненты в сторибуке.
+3. Покрыть функционал юнит-тестами на ```Jest```.
+4. Возможно, что нужны тесты на ```Cypress```, но рациональность пока не ясна.
+5. Добавить мобильную версию.
+
+### Дополнительно:
+В требованиях говорится об адаптации под IE11, поэтому весь проект написан с этим условие, **кроме** компонента ```CurrencySelector```. Там используются псевдокласс ```:has()``` просто как пример.

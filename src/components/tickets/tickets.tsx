@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import './tickets.scss';
-import { Ticket } from '../ui/ticket/ticket';
 import { TTicketProps } from './types';
+import { Ticket } from '../ticket/ticket';
 
 export const Tickets: FC<TTicketProps> = (props) => {
   return (
@@ -10,17 +10,8 @@ export const Tickets: FC<TTicketProps> = (props) => {
       {props.tickets.map((ticket, id) => (
           <Ticket 
             currency={props.selectedCurrency}
-            price={parseFloat((ticket.price * props.exchangeRates).toFixed(2))}
-            origin={ticket.origin} 
-            origin_name={ticket.origin_name} 
-            destination={ticket.destination} 
-            destination_name={ticket.destination_name} 
-            departure_date={ticket.departure_date} 
-            departure_time={ticket.departure_time} 
-            arrival_date={ticket.arrival_date} 
-            arrival_time={ticket.arrival_time} 
-            carrier={ticket.carrier} 
-            stops={ticket.stops} 
+            ticket={ticket}
+            exchangeRates={props.exchangeRates}
             key={id}
           />
       ))}

@@ -6,7 +6,7 @@ import './tickets-page.scss';
 import { ITicket } from "../../models/ticket.model";
 import { Preloader } from "../../components/ui/preloader/preloader";
 import { TCheckboxState } from "../../components/sidebar/types";
-import { Currency } from "../../components/ui/radio/types";
+import { Currency } from "../../components/ui/currency/types";
 
 export const TicketsPage: FC = () => {
     const ticketsFromStore = useCustomSelector((store) => store.getTickets.response);
